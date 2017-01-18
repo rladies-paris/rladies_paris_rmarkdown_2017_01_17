@@ -1,0 +1,64 @@
+---
+title: "My First R Markdown"
+author: "Christina Bergmann"
+date: "January 17, 2017"
+output: html_document
+---
+
+First, we want to set up our document and load all libaries.
+```{r setup, include=FALSE}
+#Do not show the code underlying the output in the final document
+knitr::opts_chunk$set(echo = FALSE)
+
+#Let's load some libraries we will need. If you notice later on that you need more libraries, add them here!
+library(tidyverse)
+
+#Make nice tables with the kable function
+library(knitr)
+```
+
+```{r readdata, include=FALSE}
+#Read in some fun comic character data
+# via https://github.com/fivethirtyeight/data/tree/master/comic-characters
+comic_data = read.csv("data/dc-wikia-data.csv.txt")
+
+#I am going to remove some cases here where sex is not labelled
+
+comic_data = comic_data[comic_data$SEX!="",]
+```
+
+The data we show is based on a 538 article entitled: "Comic Books Are Still Made By Men, For Men And About Men."
+You can read it at: https://fivethirtyeight.com/features/women-in-comic-books/
+
+Let's check what the data look like, in a nicely formatted table. Try removing the `kable` command and see what happens to your output.
+
+
+```{r Info}
+kable(head(comic_data))
+```
+
+
+Now some plots! I simply played around with some basic ggplot built-ins, try some other options (or visualizations based on data that you have processed a bit). 
+
+```{r plot_1}
+evil_woman = ggplot(comic_data, aes(x = SEX, y = ALIGN)) +
+  geom_bin2d()
+
+evil_woman
+```
+
+
+
+```{r plot_2}
+evil_woman = ggplot(comic_data, aes(x = SEX, y = ALIGN)) +
+  geom_count()
+
+evil_woman
+```
+
+
+```{r chunktitle, eval=FALSE, echo = TRUE}
+#This code is not supposed to work. R does not mind because here eval is set to FALSE
+rg'vb;eroha'eogr\p
+```
+
